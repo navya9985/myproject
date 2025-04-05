@@ -6,14 +6,29 @@
 
 
 
-		
+		<center>
+		<h1>Hello World</h1>
+		<h1>HEllo{{ name }}</h1>
 
-		<h1>Event List</h1>
-	{% for event in event_list %}
+		{{ month }}<br />
+		{{ year }}
 
-	{% if event.approved %}
+		<h1> Hello {{ name }}! Events for {{ month }}{{ year }}</h1>
+		{{ monthnumber }}
+		<br /><br /><br /><br />
+		As of{{ time }}
 
-	<div class="card">
+		<br /><br /><br /><br />
+		{{ cal|safe}}
+		<br />
+		<br />
+	</center>
+
+		<h3>Event this month</h3>
+
+		{% if event_list %}
+			{% for event in event_list %}
+				<div class="card">
   <div class="card-header">
     		{{ event}}
   </div>
@@ -23,13 +38,12 @@
     	<ul>
 	
 			<li>Date:{{ event.eventdate}}</li>
-			<li>Date till event:{{ event.days_till }}</li>
-			<li>Ocurred: {{ event.ispast }}</li>
 			<li>Venue:{{ event.venue}}</li>
 			<li>Web:{{ event.venue.web}}</li>
 			<li>Descripition{{ event.description}}</li>
 			<li>Manager{{ event.manager}}</li>
-			<li>approved:{{ event.approved }}</li>
+
+
 			{% for user in event.attedence.all %}
 				<li>Attendence:{{ user }}</li>
 			{% endfor %}
@@ -54,11 +68,19 @@
   </div>
 
 
-		{% endif %}
-		
-	{% endfor %}
 	
+				<br />
+			{% endfor %}
+		{% else %}
+			soory no events this month
+		{% endif %}
+
+		<br />
+		<br />
+
+		Copyright(c) {{ currentyear }}
 
 
-		
-{% endblock %}
+	{% endblock %}
+
+	 {% include 'events/nav.html' %}
